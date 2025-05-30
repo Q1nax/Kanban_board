@@ -16,10 +16,10 @@ export const List_Types: Record<string, TaskStatus> = {
 };
 
 export const List_Types_Show: Record<TaskStatus, string> = {
-	[List_Types.Backlog]: 'Backlog',
-	[List_Types.Ready]: 'Ready',
-	[List_Types.InProgress]: 'In progress',
-	[List_Types.Finished]: 'Finished',
+	'backlog': 'Backlog',
+	'ready': 'Ready',
+	'inProgress': 'In progress',
+	'finished': 'Finished',
 };
 
 export interface TaskListProps {

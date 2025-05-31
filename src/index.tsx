@@ -15,7 +15,21 @@ function App(): JSX.Element {
         });
     };
 
-    const storedTasks: Task[] = JSON.parse(window.localStorage.getItem('tasks') || '[]');
+    let storedTasks: Task[] = [];
+    try {
+        const parsed = JSON.parse(window.localStorage.getItem('tasks') || '[]');
+        if (Array.isArray(parsed)) {
+            storedTasks = parsed;
+        } else {
+            console.warn('Invalid tasks data type in localStorage:', typeof parsed, parsed);
+            window.localStorage.removeItem('tasks');
+            storedTasks = [];
+        }
+    } catch (error) {
+        console.warn('Failed to parse tasks from localStorage:', error);
+        window.localStorage.removeItem('tasks');
+        storedTasks = [];
+    }
     const migratedTasks = migrateData(storedTasks);
     const [tasks, setTasks] = useState<Task[]>(migratedTasks);
   
